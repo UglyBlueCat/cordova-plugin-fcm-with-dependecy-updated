@@ -2,15 +2,18 @@ buildscript {
     ext {
         // Load system enviroment defined values, or, if unavailable, plugin defaults
         def ANDROID_GRADLE_TOOLS_VERSION = System.getenv('ANDROID_GRADLE_TOOLS_VERSION') ?: '4.1.0'
+        print("Before Try: ANDROID_GRADLE_TOOLS_VERSION: "+ANDROID_GRADLE_TOOLS_VERSION)
         try {
             // Load configuration from install variables (package.json) two directories above
             def PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated']
             ANDROID_GRADLE_TOOLS_VERSION = PLUGIN_CONFIG.ANDROID_GRADLE_TOOLS_VERSION ?: ANDROID_GRADLE_TOOLS_VERSION
+            print("Try: ANDROID_GRADLE_TOOLS_VERSION: "+ANDROID_GRADLE_TOOLS_VERSION)
         } catch(Exception e0) {
             try {
                 // Load configuration from install variables (package.json) three directories above
                 def PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated']
                 ANDROID_GRADLE_TOOLS_VERSION = PLUGIN_CONFIG.ANDROID_GRADLE_TOOLS_VERSION ?: ANDROID_GRADLE_TOOLS_VERSION
+                print("Catch: ANDROID_GRADLE_TOOLS_VERSION: "+ANDROID_GRADLE_TOOLS_VERSION)
             } catch(Exception e1) {
                 def WARNING_STYLE = "${(char)27}[33;49"+"m"
                 def DEFAULT_STYLE = "${(char)27}[39;49"+"m"
