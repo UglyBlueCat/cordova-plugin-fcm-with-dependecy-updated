@@ -9,6 +9,7 @@ buildscript {
             ANDROID_GRADLE_TOOLS_VERSION = PLUGIN_CONFIG.ANDROID_GRADLE_TOOLS_VERSION ?: ANDROID_GRADLE_TOOLS_VERSION
             println("Try: ANDROID_GRADLE_TOOLS_VERSION: "+ANDROID_GRADLE_TOOLS_VERSION)
         } catch(Exception e0) {
+            println("catch: Exception: "+e0)
             try {
                 // Load configuration from install variables (package.json) three directories above
                 def PLUGIN_CONFIG = new groovy.json.JsonSlurper().parseText(file("${projectDir}/../../../package.json").text).cordova.plugins['cordova-plugin-fcm-with-dependecy-updated']
